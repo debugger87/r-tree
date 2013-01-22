@@ -13,6 +13,7 @@ import rstar.spatial.SpatialPoint;
 import util.Constants;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,6 +37,13 @@ public class RStarTree implements ISpatialQuery, IDtoConvertible {
     public RStarTree(int dimension) {
         this.dimension = dimension;
         this.saveFile = new File(Constants.TREE_FILE);
+        if(!this.saveFile.exists()){
+            try{
+                this.saveFile.createNewFile();
+            } catch (IOException e){
+                System.out.println(e.toString());
+            }
+        }
         this.storage = new StorageManager();
         this.splitManager = new RStarSplit(dimension, storage);
 
