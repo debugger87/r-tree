@@ -6,23 +6,23 @@ import rstar.interfaces.IDtoConvertible;
 public class SpatialPoint implements IDtoConvertible {
     private int _dimension;
     private float[] _cords;
-    private String _oid;
+    private float _oid;
 
     public SpatialPoint() {
     }
 
     public SpatialPoint(int dimension) {
         this._dimension = dimension;
-        this._oid = "-1";
+        this._oid = -1;
     }
 
     public SpatialPoint(float[] cords) {
         this._cords = cords;
         this._dimension = cords.length;
-        this._oid = "-1";
+        this._oid = -1;
     }
 
-    public SpatialPoint(float[] cords, String oid) {
+    public SpatialPoint(float[] cords, float oid) {
         this._cords = cords;
         this._dimension = cords.length;
         this._oid = oid;
@@ -31,7 +31,7 @@ public class SpatialPoint implements IDtoConvertible {
     public SpatialPoint(PointDTO dto) {
         this._cords = dto.coords;
         this._dimension = dto.coords.length;
-        this._oid = String.valueOf(dto.oid);
+        this._oid = dto.oid;
     }
 
     public int getDimension(){
@@ -46,11 +46,11 @@ public class SpatialPoint implements IDtoConvertible {
         return _cords;
     }
 
-    public String getOid() {
+    public float getOid() {
         return _oid;
     }
 
-    public void setOid(String oid) {
+    public void setOid(float oid) {
         this._oid = oid;
     }
 
@@ -84,6 +84,6 @@ public class SpatialPoint implements IDtoConvertible {
 
     @Override
     public PointDTO toDTO() {
-        return new PointDTO(Float.parseFloat(_oid), _cords);
+        return new PointDTO(_oid, _cords);
     }
 }
